@@ -1,5 +1,3 @@
-// const array = ['diego', 'karen', 'Oscar',];
-
 class MyArray {
   constructor() { 
     this.length = 0;
@@ -27,26 +25,29 @@ class MyArray {
   }
   shiftIndex (index) { 
     console.group(`ciclo for del shiftIndex`)
-      console.log(this.data, `antes for`)
+      console.log(`length del array antes del for: ${this.length}`)
+      console.log(this.data, `myArray antes del for`);
+
     for(let i = index; i < this.length - 1; i++) { 
       this.data[i] = this.data[i + 1];
-      console.log(this.data, `ciclo for`) 
+      console.log(this.data, `ciclo for N. ${i}`) 
     }
     delete this.data[this.length - 1];
 
     this.length--;
       console.log(this.data, `termin for`)
 
+      console.log(`length del arr despues del for: ${this.length}`)
     console.groupEnd();
     return index;
   }
   unshift (item) {
     console.group(`ciclo for del unshift`);
-      console.log(`length del arr antes del for: ${this.length}`)
-      console.log(this.data, `antes del for`);
+      console.log(`length del array antes del for: ${this.length}`)
+      console.log(this.data, `myArray antes del for`);
 
     for (let i = this.length; i > 0; i --) { 
-      this.data[i] = this.data[i - 1];
+      this.data[i] = this.data[i - 1]; //IMPORTATE!!! el length es de 5 pero el index original solo llega a 4, cuando le pasamos el .leght como su index (this.data[i]), estamos creando un nuevo item pero compiando el que tenemos antes this.data[i - 1];
       console.log(this.data, `N. ${i}`) 
     }
     this.data[0] = item;
@@ -58,28 +59,27 @@ class MyArray {
 
     return item;
   }
+  shift () { 
+    const firstItem = this.data[0];
+    delete this.data[0];
+    this.length--;
+
+    return firstItem;
+  }
 }
-/* 
-  el array tiene 6 items, length de 6; 
-  i = a el largo del array 6; 
-  si i es mayor que  0, entondes i - 1; 
-  1) this.data[this.length = 6] va ser igual = this.data[this. length 6 - 1]
-        this.data va a valer 5, this.lenght = 5; 
-  2) this.data[this.length = 1] = this.data[this.length 1 -1 ]
-        this.data vale ahora 0; 
-  
-  3) el ciclo se rompe;
-*/
 
 const myArray = new MyArray;    //creada nueva instancia
 
 myArray.push('hola'); myArray.push('hola1') // este sera eliminado
 myArray.push('hola2'); myArray.push('hola3'); myArray.push('hola4'); myArray.push('hola5')
 
-console.log(myArray.myDelete(1));
-console.log(myArray)
+console.log(`metodo myDelete, elemento eliminado: ${myArray.myDelete(1)}`);
 
 console.log(myArray.unshift(`hola6`));
+
+console.group(`metodo shift`)
+  console.log(`Elemento eliminado: ${myArray.shift()}`);
+console.groupEnd();
 
 
 /* 
@@ -104,7 +104,3 @@ y terminara cuando nos quedemos sin array.
   6. queda eliminar la longitud del array para que no sea vea el undefined ⇒ this.length–;
 
 */
-
-
-//Reto crear un metodo para poder agregar un elemento al inicio del array,
-// y eliminar un elemento al inicio del array.
