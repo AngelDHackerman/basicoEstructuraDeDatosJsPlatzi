@@ -26,36 +26,68 @@ class MyArray {
     return item;
   }
   shiftIndex (index) { 
+    console.group(`ciclo for del shiftIndex`)
+      console.log(this.data, `antes for`)
     for(let i = index; i < this.length - 1; i++) { 
-      console.log(i)
       this.data[i] = this.data[i + 1];
+      console.log(this.data, `ciclo for`) 
     }
     delete this.data[this.length - 1];
 
     this.length--;
+      console.log(this.data, `termin for`)
+
+    console.groupEnd();
+    return index;
+  }
+  unshift (item) {
+    console.group(`ciclo for del unshift`);
+      console.log(`length del arr antes del for: ${this.length}`)
+      console.log(this.data, `antes del for`);
+
+    for (let i = this.length; i > 0; i --) { 
+      this.data[i] = this.data[i - 1];
+      console.log(this.data, `N. ${i}`) 
+    }
+    this.data[0] = item;
+    this.length++;
+
+      console.log(this.data, `out for`)
+      console.log(`length del arr despues del for: ${this.length}`)
+    console.groupEnd();
+
+    return item;
   }
 }
-
-
+/* 
+  el array tiene 6 items, length de 6; 
+  i = a el largo del array 6; 
+  si i es mayor que  0, entondes i - 1; 
+  1) this.data[this.length = 6] va ser igual = this.data[this. length 6 - 1]
+        this.data va a valer 5, this.lenght = 5; 
+  2) this.data[this.length = 1] = this.data[this.length 1 -1 ]
+        this.data vale ahora 0; 
+  
+  3) el ciclo se rompe;
+*/
 
 const myArray = new MyArray;    //creada nueva instancia
 
-myArray.push('hola')
-myArray.push('hola1') // este sera eliminado
-myArray.push('hola2')
-myArray.push('hola3')
-myArray.push('hola4')
-myArray.push('hola5')
+myArray.push('hola'); myArray.push('hola1') // este sera eliminado
+myArray.push('hola2'); myArray.push('hola3'); myArray.push('hola4'); myArray.push('hola5')
 
-myArray.myDelete(1);
+console.log(myArray.myDelete(1));
 console.log(myArray)
 
-/* 
-  {1: ariel, 2: ellie, 3: nina, 4: celular} borraremos Ellie
+console.log(myArray.unshift(`hola6`));
 
-  1.Estamos en el loop: for(let i = index; i < this.length -1; i++) 
-  este empieza con el i = index, es decir, el bucle empieza con “ellie”, 
-  y terminara cuando nos quedemos sin array.
+
+/* 
+{1: ariel, 2: ellie, 3: nina, 4: celular} borraremos Ellie
+
+1.Estamos en el loop: for(let i = index; i < this.length -1; i++) 
+este empieza con el i = index, es decir, el bucle empieza con “ellie”, 
+y terminara cuando nos quedemos sin array.
 
   2.this.data[i] = this.data[i + 1]; Aca empieza el show, 
   entonces la idea es eliminar a ellie, entonces ahora, ellie = this.data[i] 
@@ -72,3 +104,7 @@ console.log(myArray)
   6. queda eliminar la longitud del array para que no sea vea el undefined ⇒ this.length–;
 
 */
+
+
+//Reto crear un metodo para poder agregar un elemento al inicio del array,
+// y eliminar un elemento al inicio del array.
