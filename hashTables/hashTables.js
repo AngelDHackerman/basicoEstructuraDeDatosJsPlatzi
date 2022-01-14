@@ -36,16 +36,16 @@ class HashTable {
     if ( currentBucket ) { 
       for ( let i = 0; i < currentBucket.length; i++) { 
         if ( currentBucket[i][0] === key ) { 
-          let removido = currentBucket[i][0];
-          delete currentBucket[i]; // con esto ya logre borrar a Diego, necesito cambiar el index de Mariana
-          // delete currentBucket[i][0];
-          // delete currentBucket[i][1];
+          const removido = currentBucket[i];
+          currentBucket.splice(i, 1)//.splice(desde donde eleminar, cuantos eleminiar)
           return removido;
         }
       }
     }
+    return undefined;
   }
 }
+
 
 const myHashTable = new HashTable(50); //aqui dice que se necesitan 50 espacios libres para el hash table
 
