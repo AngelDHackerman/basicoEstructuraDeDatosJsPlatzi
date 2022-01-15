@@ -1,23 +1,23 @@
 // 1 --> 2 --> 3 --> 4 --> 5 --> null
 
-let singlyLinkedList = { 
-  head: { 
-    value: 1, 
-    next: { 
-      value: 2, 
-      next: { 
-        value: 3, 
-        next: { 
-          value: 4,
-          next: { 
-            value: 5,
-            next:null,
-          }
-        }
-      }
-    }
-  }
-}
+// let singlyLinkedList = { 
+//   head: { 
+//     value: 1, 
+//     next: { 
+//       value: 2, 
+//       next: { 
+//         value: 3, 
+//         next: { 
+//           value: 4,
+//           next: { 
+//             value: 5,
+//             next:null,
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 class Node { 
@@ -36,6 +36,42 @@ class MySinglyLinkedList {
     this.tail = this.head;
 
     this.lenght = 1;
+  }
+  append (value) { 
+    const newNode = new Node(value);
+
+    this.tail.next = newNode;// Esto agrega el nodo, pero no lo convierte en la nueva cola.
+    this.tail = newNode; // Con esto ya lo posicionamos en la cola del linked list.
+    this.lenght++; //Aqui incrementamos la longitud del list. 
+
+    return this;
+  }
+  prepend(value) { 
+    const newNode = new Node(value);
+
+    newNode.next = this.head;
+    this.head = newNode;
+    this.lenght++;
+
+    return this;
+  }
+  insert (index, value) {
+    if(index >= this.lenght) {
+      return this.append(value);
+    }
+
+    const newNode = new Node(value);
+    const firstPointer = this.getTheIndex(index - 1);
+    const holdingPointer = firstPointer.next;//Este de aqui fue creado para que el garbage collector no lo elimine porque se va a quedar in un pointer
+    firstPointer.next = newNode;
+    newNode.next = holdingPointer;
+
+    this.lenght++;
+
+    return this;
+  } 
+  getTheIndex (index) { 
+    
   }
 }
 
