@@ -71,12 +71,20 @@ class MySinglyLinkedList {
     return this;
   } 
   getTheIndex (index) { 
-    
+    let counter = 0; 
+    let currentNode = this.head;
+
+    while( counter !== index ) { 
+      currentNode = currentNode.next;
+      counter++;
+
+    }
+
+    return currentNode;
   }
 }
 
 let mySinglyLinkedList = new MySinglyLinkedList(1);
-
 
 
 // append(value){
