@@ -20,7 +20,7 @@ class Queue {
       this.first = newNode; 
       this.last = newNode;
     } else { 
-      this.last.next = newNode;
+      this.last.next = newNode; //Este nos ayuda cuando queramos eleminar el primer nodo.
       this.last = newNode;
     }
     this.length++;
